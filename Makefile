@@ -19,7 +19,7 @@ TARGET_BIN := $(BIN_DIR)/$(TARGET_NAME).bin
 # these locations should be specified relative to the makefile location.
 SRC_DIRS = \
 	CORE \
-	HARDWARE/EPD \
+	HARDWARE \
 	HARDWARE/EXTI \
 	HARDWARE/Fonts \
 	HARDWARE/FT6336 \
@@ -37,7 +37,7 @@ SRC_DIRS = \
 # these locations should be specified relative to the makefile location.
 INC_DIRS = \
 	CORE \
-	HARDWARE/EPD \
+	HARDWARE \
 	HARDWARE/EXTI \
 	HARDWARE/Fonts \
 	HARDWARE/FT6336 \
