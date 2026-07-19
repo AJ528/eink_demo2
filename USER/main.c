@@ -37,6 +37,7 @@ int	main(void)
 			EPD_WhiteScreen_White(); //Clear screen function.
 			EPD_DeepSleep(); //Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
       delay_s(2); //Delay for 2s.	
+#if 0
 		 /************Full display(3s)*******************/
 			EPD_Init(); //Full screen update initialization.
 			EPD_WhiteScreen_ALL(gImage_1); //To Display one image using full screen update.
@@ -53,8 +54,9 @@ int	main(void)
 			EPD_WhiteScreen_ALL_4G(gImage_4G1); //To display one image using fast update.
 			EPD_DeepSleep(); //Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
 			delay_s(2); //Delay for 2s.			
+#endif
 
-	#if 1 //Partial update demostration.
+	#if 0 //Partial update demostration.
 	//Partial update demo support displaying a clock at 5 locations with 00:00.  If you need to perform partial update more than 5 locations, please use the feature of using partial update at the full screen demo.
 	//After 5 partial update, implement a full screen update to clear the ghosting caused by partial update.
 	//////////////////////Partial update time demo/////////////////////////////////////
