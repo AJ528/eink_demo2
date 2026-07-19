@@ -1,10 +1,9 @@
 #include "stm32f10x.h"
-#include "delay.h"
 #include "sys.h"
 //EPD
 #include "Display_EPD_W21_spi.h"
 #include "Display_EPD_W21.h"
-#include "Ap_29demo.h"	
+// #include "Ap_29demo.h"	
 
 //Tips//
 /*
@@ -18,7 +17,6 @@
 
 int	main(void)
 {
-		delay_init();	    	     //Delay function initialization
     EPD_GPIO_Init();       //EPD GPIO  initialization
 
 		EPD_Init(); //Full screen update initialization.
