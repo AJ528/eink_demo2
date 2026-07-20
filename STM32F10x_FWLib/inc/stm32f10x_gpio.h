@@ -21,15 +21,15 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F10x_GPIO_H
-#define __STM32F10x_GPIO_H
+#ifndef __STM32F10X_GPIO_H
+#define __STM32F10X_GPIO_H
 
 #ifdef __cplusplus
  extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f10x.h"
+#include "stm32f1xx.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Driver
   * @{
@@ -321,8 +321,8 @@ typedef enum
 /** @defgroup Ethernet_Media_Interface 
   * @{
   */ 
-#define GPIO_ETH_MediaInterface_MII    ((u32)0x00000000) 
-#define GPIO_ETH_MediaInterface_RMII   ((u32)0x00000001)                                       
+#define GPIO_ETH_MediaInterface_MII    ((uint32_t)0x00000000) 
+#define GPIO_ETH_MediaInterface_RMII   ((uint32_t)0x00000001)                                       
 
 #define IS_GPIO_ETH_MEDIA_INTERFACE(INTERFACE) (((INTERFACE) == GPIO_ETH_MediaInterface_MII) || \
                                                 ((INTERFACE) == GPIO_ETH_MediaInterface_RMII))
@@ -369,7 +369,7 @@ void GPIO_ETH_MediaInterfaceConfig(uint32_t GPIO_ETH_MediaInterface);
 }
 #endif
 
-#endif /* __STM32F10x_GPIO_H */
+#endif /* __STM32F10X_GPIO_H */
 /**
   * @}
   */

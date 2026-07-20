@@ -59,11 +59,10 @@ defined in linker script */
 
   .section .text.Reset_Handler
   .weak Reset_Handler
-  .type Reset_Handler, %function
+  .type Reset_Handler, STT_FUNC
 Reset_Handler:
-
-/* Call the clock system initialization function.*/
-    bl  SystemInit
+  ldr   r0, =_estack
+  mov   sp, r0          /* set stack pointer */
 
 /* Copy the data segment initializers from flash to SRAM */
   ldr r0, =_sdata
@@ -96,12 +95,13 @@ LoopFillZerobss:
   cmp r2, r4
   bcc FillZerobss
 
-/* Call static constructors */
-/*   bl __libc_init_array */
 /* Call the application's entry point.*/
   bl main
-  bx lr
-.size Reset_Handler, .-Reset_Handler
+
+LoopForever:
+    b LoopForever
+
+  .size Reset_Handler, .-Reset_Handler
 
 /**
  * @brief  This is the code that gets called when the processor receives an
@@ -111,11 +111,12 @@ LoopFillZerobss:
  * @param  None
  * @retval : None
 */
-    .section .text.Default_Handler,"ax",%progbits
+  .section .text.Default_Handler,"ax",%progbits
 Default_Handler:
 Infinite_Loop:
   b Infinite_Loop
   .size Default_Handler, .-Default_Handler
+
 /******************************************************************************
 *
 * The minimal vector table for a Cortex M3.  Note that the proper constructs
@@ -124,12 +125,9 @@ Infinite_Loop:
 *
 ******************************************************************************/
   .section .isr_vector,"a",%progbits
-  .type g_pfnVectors, %object
-  .size g_pfnVectors, .-g_pfnVectors
-
+  .type g_pfnVectors, STT_OBJECT
 
 g_pfnVectors:
-
   .word _estack
   .word Reset_Handler
   .word NMI_Handler
@@ -252,6 +250,8 @@ g_pfnVectors:
   .word 0
   .word BootRAM       /* @0x1E0. This is for boot in RAM mode for
                          STM32F10x High Density devices. */
+  
+  .size g_pfnVectors, .-g_pfnVectors
 
 /*******************************************************************************
 *

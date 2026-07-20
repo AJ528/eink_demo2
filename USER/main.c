@@ -1,5 +1,4 @@
-#include "stm32f10x.h"
-#include "sys.h"
+#include "stm32f1xx.h"
 //EPD
 #include "Display_EPD_W21_spi.h"
 #include "Display_EPD_W21.h"

@@ -1,6 +1,6 @@
 #ifndef _DISPLAY_EPD_W21_SPI_
 #define _DISPLAY_EPD_W21_SPI_
-#include "stm32f10x.h"
+#include "stm32f1xx.h"
 #include "stm32f10x_gpio.h"
 
 
