@@ -3,6 +3,9 @@
 #include "Display_EPD_W21_spi.h"
 #include "Display_EPD_W21.h"
 
+
+#include "stm32f1xx.h"
+
 //Tips//
 /*
 1.Flickering is normal when EPD is performing a full screen update to clear ghosting from the previous image so to ensure better clarity and legibility for the new image.
@@ -13,15 +16,30 @@
 6.When porting the program, set the BUSY pin to input mode and other pins to output mode.
 */
 
-int	main(void)
+static inline void enable_cycle_count(void);
+
+extern uint32_t _vector_table_offset;
+
+int main(void)
 {
-    EPD_GPIO_Init();       //EPD GPIO  initialization
+  SCB->VTOR = (uint32_t)(&_vector_table_offset);  // set the vector table offset
+  enable_cycle_count();
 
-		EPD_Init(); //Full screen update initialization.
-		EPD_WhiteScreen_White(); //Clear screen function.
-		EPD_DeepSleep(); //Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
+	
+	EPD_GPIO_Init();       //EPD GPIO  initialization
 
-		while(1);
+	EPD_Init(); //Full screen update initialization.
+	EPD_WhiteScreen_White(); //Clear screen function.
+	EPD_DeepSleep(); //Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
+
+	while(1);
 }	
 
 
+static inline void enable_cycle_count(void)
+{
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+  DWT->CYCCNT = 0;
+  DWT->LSUCNT = 0;
+  DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk | DWT_CTRL_LSUEVTENA_Msk;
+}
