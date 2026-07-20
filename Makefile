@@ -18,20 +18,16 @@ TARGET_BIN := $(BIN_DIR)/$(TARGET_NAME).bin
 # locations of directories containing source files.
 # these locations should be specified relative to the makefile location.
 SRC_DIRS = \
-	CORE \
-	HARDWARE \
 	STM32F10x_FWLib/src \
 	SYSTEM \
-	USER
+	src
 
 # locations of directories containing header files.
 # these locations should be specified relative to the makefile location.
 INC_DIRS = \
-	CORE \
-	HARDWARE \
 	STM32F10x_FWLib/inc \
 	SYSTEM \
-	USER
+	inc
 
 # predefined macros
 DEFINES = 		\
