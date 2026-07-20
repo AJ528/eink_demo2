@@ -66,65 +66,8 @@ void EPD_Init(void)
 	EPD_W21_WriteDATA(0x22);
 	
 }
-//Fast update 1 initialization
-void EPD_Init_Fast(void)
-{
-	EPD_W21_RST_0;  // Module reset   
-	delay_xms(10);//At least 10ms delay 
-	EPD_W21_RST_1;
-	delay_xms(10); //At least 10ms delay 
-  
-	EPD_W21_WriteCMD(0X00);			//PANNEL SETTING
-	EPD_W21_WriteDATA(0x1F);   //KW-3f   KWR-2F	BWROTP 0f	BWOTP 1f
-
-	EPD_W21_WriteCMD(0X50);			//VCOM AND DATA INTERVAL SETTING
-	EPD_W21_WriteDATA(0x10);
-	EPD_W21_WriteDATA(0x07);
-
-	EPD_W21_WriteCMD(0x04); //POWER ON
-	delay_xms(100);  
-	lcd_chkstatus();        //waiting for the electronic paper IC to release the idle signal
-
-	//Enhanced display drive(Add 0x06 command)
-	EPD_W21_WriteCMD(0x06);			//Booster Soft Start 
-	EPD_W21_WriteDATA (0x27);
-	EPD_W21_WriteDATA (0x27);   
-	EPD_W21_WriteDATA (0x18);		
-	EPD_W21_WriteDATA (0x17);		
-
-	EPD_W21_WriteCMD(0xE0);
-	EPD_W21_WriteDATA(0x02);
-	EPD_W21_WriteCMD(0xE5);
-	EPD_W21_WriteDATA(0x5A);
-}
-
 //////////////////////////////Display Update Function///////////////////////////////////////////////////////
-//Full screen update update function
-void EPD_Update(void)
-{   
-	//update
-	EPD_W21_WriteCMD(0x12);		//DISPLAY update 	
-	delay_xms(1);	             //!!!The delay here is necessary, 200uS at least!!!     
-	lcd_chkstatus();          //waiting for the electronic paper IC to release the idle signal
-}
 
-//Clear screen display
-void EPD_WhiteScreen_White(void)
-{
-	unsigned int i;
-	//Write Data
-	EPD_W21_WriteCMD(0x10);	     
-	for(i=0;i<EPD_ARRAY;i++)	     
-	{
-		EPD_W21_WriteDATA(0x00);  
-	}
-	EPD_W21_WriteCMD(0x13);	     
-	for(i=0;i<EPD_ARRAY;i++)	     
-	{
-		EPD_W21_WriteDATA(0x00);  
-	}
-   EPD_Update();	 
-}
 
 //Deep sleep function
 void EPD_DeepSleep(void)

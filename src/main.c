@@ -1,6 +1,10 @@
-#include "stm32f1xx.h"
+
+#include "sysclk.h"
+
+#include "gpio.h"
+
 //EPD
-#include "Display_EPD_W21_spi.h"
+#include "display_epd.h"
 #include "Display_EPD_W21.h"
 
 
@@ -25,11 +29,13 @@ int main(void)
   SCB->VTOR = (uint32_t)(&_vector_table_offset);  // set the vector table offset
   enable_cycle_count();
 
-	
-	EPD_GPIO_Init();       //EPD GPIO  initialization
+  GPIO_init();
+	sysclk_init();
 
 	EPD_Init(); //Full screen update initialization.
-	EPD_WhiteScreen_White(); //Clear screen function.
+
+	EPD_whitescreen_white();
+
 	EPD_DeepSleep(); //Enter the sleep mode and please do not delete it, otherwise it will reduce the lifespan of the screen.
 
 	while(1);
