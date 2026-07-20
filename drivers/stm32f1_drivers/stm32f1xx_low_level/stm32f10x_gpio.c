@@ -21,7 +21,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f10x_gpio.h"
-#include "stm32f10x_rcc.h"
+#include "stm32f1xx_ll_rcc.h"
 #include "stm32_assert.h"
 
 /** @addtogroup STM32F10x_StdPeriph_Driver
@@ -111,44 +111,44 @@ void GPIO_DeInit(GPIO_TypeDef* GPIOx)
   /* Check the parameters */
   assert_param(IS_GPIO_ALL_PERIPH(GPIOx));
   
-  if (GPIOx == GPIOA)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA, DISABLE);
-  }
-  else if (GPIOx == GPIOB)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB, DISABLE);
-  }
-  else if (GPIOx == GPIOC)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC, DISABLE);
-  }
-  else if (GPIOx == GPIOD)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, DISABLE);
-  }    
-  else if (GPIOx == GPIOE)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, DISABLE);
-  } 
-  else if (GPIOx == GPIOF)
-  {
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF, ENABLE);
-    RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF, DISABLE);
-  }
-  else
-  {
-    if (GPIOx == GPIOG)
-    {
-      RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG, ENABLE);
-      RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG, DISABLE);
-    }
-  }
+  // if (GPIOx == GPIOA)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOA, DISABLE);
+  // }
+  // else if (GPIOx == GPIOB)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOB, DISABLE);
+  // }
+  // else if (GPIOx == GPIOC)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOC, DISABLE);
+  // }
+  // else if (GPIOx == GPIOD)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOD, DISABLE);
+  // }    
+  // else if (GPIOx == GPIOE)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOE, DISABLE);
+  // } 
+  // else if (GPIOx == GPIOF)
+  // {
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF, ENABLE);
+  //   RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOF, DISABLE);
+  // }
+  // else
+  // {
+  //   if (GPIOx == GPIOG)
+  //   {
+  //     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG, ENABLE);
+  //     RCC_APB2PeriphResetCmd(RCC_APB2Periph_GPIOG, DISABLE);
+  //   }
+  // }
 }
 
 /**
@@ -159,8 +159,8 @@ void GPIO_DeInit(GPIO_TypeDef* GPIOx)
   */
 void GPIO_AFIODeInit(void)
 {
-  RCC_APB2PeriphResetCmd(RCC_APB2Periph_AFIO, ENABLE);
-  RCC_APB2PeriphResetCmd(RCC_APB2Periph_AFIO, DISABLE);
+  // RCC_APB2PeriphResetCmd(RCC_APB2Periph_AFIO, ENABLE);
+  // RCC_APB2PeriphResetCmd(RCC_APB2Periph_AFIO, DISABLE);
 }
 
 /**

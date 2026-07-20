@@ -1,13 +1,16 @@
 #include "Display_EPD_W21_spi.h"
 
 #include "stm32f10x_gpio.h"
-#include "stm32f10x_rcc.h"
+#include "stm32f1xx_ll_rcc.h"
+#include "stm32f1xx_ll_bus.h"
 
 //E-paper GPIO initialization
 void EPD_GPIO_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;	
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD|RCC_APB2Periph_GPIOE, ENABLE);
+	// RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD|RCC_APB2Periph_GPIOE, ENABLE);
+	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOD);
+  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOE);
 	  				     	
 	 //CS-->PD8   SCK-->PD9  SDO--->PD10 
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10;		//Port configuration
