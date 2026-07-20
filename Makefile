@@ -18,16 +18,18 @@ TARGET_BIN := $(BIN_DIR)/$(TARGET_NAME).bin
 # locations of directories containing source files.
 # these locations should be specified relative to the makefile location.
 SRC_DIRS = \
-	STM32F10x_FWLib/src \
-	SYSTEM \
-	src
+	src \
+	drivers/utilities \
+	drivers/stm32f1_drivers/stm32f1xx_low_level
 
 # locations of directories containing header files.
 # these locations should be specified relative to the makefile location.
 INC_DIRS = \
-	STM32F10x_FWLib/inc \
-	SYSTEM \
-	inc
+	inc \
+	drivers/inc \
+	drivers/stm32f1_drivers/CMSIS_inc \
+	drivers/stm32f1_drivers/device_inc \
+	drivers/stm32f1_drivers/stm32f1xx_ll_inc 
 
 # predefined macros
 DEFINES = 		\
