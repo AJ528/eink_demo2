@@ -1,38 +1,40 @@
 #include "Display_EPD_W21_spi.h"
 
-#include "stm32f10x_gpio.h"
+#include "stm32f1xx_ll_gpio.h"
 #include "stm32f1xx_ll_rcc.h"
 #include "stm32f1xx_ll_bus.h"
 
 //E-paper GPIO initialization
 void EPD_GPIO_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;	
+	LL_GPIO_InitTypeDef  GPIO_InitStructure;	
 	// RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOD|RCC_APB2Periph_GPIOE, ENABLE);
 	LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOD);
   LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_GPIOE);
 	  				     	
 	 //CS-->PD8   SCK-->PD9  SDO--->PD10 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9|GPIO_Pin_10;		//Port configuration
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 			
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;		 		
-	GPIO_Init(GPIOD, &GPIO_InitStructure);	  			
+	GPIO_InitStructure.Pin = LL_GPIO_PIN_8|LL_GPIO_PIN_9|LL_GPIO_PIN_10;		//Port configuration
+	GPIO_InitStructure.Mode = LL_GPIO_MODE_OUTPUT; 		 			
+	GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
+	GPIO_InitStructure.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+	LL_GPIO_Init(GPIOD, &GPIO_InitStructure);	  			
 	 // D/C--->PE15	   RES-->PE14
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_14|GPIO_Pin_15;		//Port configuration
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 			
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;		 		
-	GPIO_Init(GPIOE, &GPIO_InitStructure);	  				     			
+	GPIO_InitStructure.Pin = LL_GPIO_PIN_14|LL_GPIO_PIN_15;		//Port configuration
+	GPIO_InitStructure.Mode = LL_GPIO_MODE_OUTPUT; 		 			
+	GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;		 		
+	LL_GPIO_Init(GPIOE, &GPIO_InitStructure);	  				     			
 	// BUSY--->PE13
-	GPIO_InitStructure.GPIO_Pin  = GPIO_Pin_13;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;	//Pull up input
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;
- 	GPIO_Init(GPIOE, &GPIO_InitStructure);				//Initialize GPIO
+	GPIO_InitStructure.Pin  = LL_GPIO_PIN_13;
+	GPIO_InitStructure.Mode = LL_GPIO_MODE_INPUT;	//Pull up input
+	GPIO_InitStructure.Pull = LL_GPIO_PULL_UP;
+	GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;
+ 	LL_GPIO_Init(GPIOE, &GPIO_InitStructure);				//Initialize GPIO
 	
 	 //LED 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_12;		//Port configuration
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; 		 			
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_10MHz;		 		
-	GPIO_Init(GPIOE, &GPIO_InitStructure);
+	GPIO_InitStructure.Pin = LL_GPIO_PIN_12;		//Port configuration
+	GPIO_InitStructure.Mode = LL_GPIO_MODE_OUTPUT; 		 			
+	GPIO_InitStructure.Speed = LL_GPIO_SPEED_FREQ_MEDIUM;		 		
+	LL_GPIO_Init(GPIOE, &GPIO_InitStructure);
 }
 
 
